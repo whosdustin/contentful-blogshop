@@ -1,0 +1,8 @@
+- post.each do |post|
+  %article
+    %h1= post.title
+    %small= published_at(post.date)
+    = markdown(post.body)
+    %footer
+      - if post.tags
+        %h6= post.tags.join(', ')

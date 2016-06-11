@@ -1,0 +1,39 @@
+- product.each do |product|
+  %figure{:class => 'js-img-display'}
+    %img{ :id => product.images.first.id,
+          :src => product.images.first.image_url(height: 400),
+          :alt => product.images.first.description}
+  .img-thumbs
+    - product.images.each do |image|
+      %img{ :id => image.id,
+            :src => image.image_url(height: 75),
+            :alt => image.description}
+  %h1= product.product_name
+  %h4 Price
+  %span<
+    $
+    = product.price
+  %h4 Quantity
+  .progress-bar
+    %span= product.quantity
+  - if product.description
+    %h4 Description
+    %p= product.description
+  - if product.tags
+    %h4 Tags
+    %span= product.tags.join(', ')
+  - if product.categories
+    %h4 Category
+    - product.categories.each do |category|
+      %span= category.title
+  %form{:class => 'payment',
+        :action => '/shop/charge/'+product.id,
+        :method => 'post'}
+    %script{:class => 'stripe-button',
+            :src => "https://checkout.stripe.com/checkout.js",
+            :data => {:key => "#{settings.publishable_key}",
+            :description => "#{product.product_name}",
+            :amount => "#{product.price * 100}",
+            :image => "#{product.images.first.image_url(height: 75)}",
+            :locale =>"auto",
+            :shippingAddress =>"true"}}

@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    = title_tag
+    = meta
+    = favicon
+    = ie_shim
+  %body
+    = haml :'_masthead'
+    %main{:class => 'content'}
+      = yield
+    = javascripts

@@ -1,0 +1,9 @@
+%h1 My Shop
+- @products.each do |product|
+  %h3
+    %a{:href => '/shop/'+product.id, :title => product.product_name}= product.product_name
+  %p= product.description
+  %span<
+    $
+    = product.price
+  %img{:src => product.images.first.image_url(width: 240), :alt => product.images.first.description}

@@ -1,0 +1,7 @@
+- @posts.each do |post|
+  %article
+    %h2
+      %a{:href =>'/articles/'+post.id, :title => post.title}= post.title
+    %p
+      %small= published_at(post.date)
+      = truncate(post.body, 150)

@@ -1,0 +1,16 @@
+%h1 This is the damn homepage.
+%h2 Recent Posts
+- @posts.take(2).each do |post|
+  %article
+    %h3
+      %a{:href => '/articles/'+post.id, :title => post.title}= post.title
+    %small= published_at(post.date)
+    %p= truncate(post.body, 50)
+%h2 Recent Products
+- @products.take(2).each do |product|
+  %section
+    %img{ :id => product.images.first.id,
+          :src => product.images.first.image_url(height: 150),
+          :alt => product.images.first.description}
+    %h3
+      %a{:href => '/shop/'+product.id, :title => product.product_name}= product.product_name
